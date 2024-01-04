@@ -2,9 +2,10 @@ import aiohttp
 from typing import List, Union
 
 from .queries import Queries
-from .models import SoundsData, Marathon, Game, Segment, Runner, Filename, Charity, Attendee, Attendance, Sound
+from .models import (SoundsData, Marathon, Game, Segment, Runner, Filename, Charity, Attendee, 
+                     Attendance, Sound)
 
-BOKO_API_URL = "https://api.bokoblin.com"
+BOKO_API_URL = "https://bokoblin.com/api/graphql"
 
 
 class AsyncBokoClient:
@@ -36,14 +37,14 @@ class AsyncBokoClient:
         Gets the full list of marathons from the API
         """
         data = await self._request(Queries.MARATHONS.value)
-        return [Marathon(marathon) for marathon in data["data"]["marathons"]]
+        return [Marathon(self._session, marathon) for marathon in data["data"]["marathons"]]
     
     async def get_marathon_by_id(self, marathon_id: int) -> Marathon:
         """
         Gets a single marathon from the API
         """
         data = await self._request(Queries.MARATHON.value, {"id": marathon_id})
-        return Marathon(data["data"]["marathon"])
+        return Marathon(self._session, data["data"]["marathon"])
     
     async def get_marathon_by_name(self, marathon_name: str) -> Marathon:
         """
@@ -121,7 +122,7 @@ class AsyncBokoClient:
         Gets all charities from the API
         """
         data = await self._request(Queries.CHARITIES.value)
-        return [Charity(charity) for charity in data["data"]["charities"]]
+        return [Charity(self._session, data=charity) for charity in data["data"]["charities"]]
 
     async def get_charity_by_name(self, charity_name: str) -> Charity:
         """

@@ -19,6 +19,10 @@ class Queries(Enum):
             start_date
             stop_date
             playlist
+            donationsTime{
+                hour
+                total
+            }
             charity{
                 id
                 slug
@@ -49,13 +53,17 @@ class Queries(Enum):
                 website
                 total
             }
+            donationsTime{
+                hour
+                total
+            }
             segments{
                 id
                 game{
                     id
                     title
-                    isZelda
-                    isEvent
+                    iszelda
+                    isevent
                 }
                 modifier
                 raised
@@ -69,7 +77,7 @@ class Queries(Enum):
                         twitch_login
                         rank
                     }
-                    runner_rank
+                    rank
                 }
                 filenames{
                     filename
@@ -94,8 +102,8 @@ class Queries(Enum):
         games{
             id
             title
-            isZelda
-            isEvent
+            iszelda
+            isevent
         }
     }"""
 
@@ -106,8 +114,8 @@ class Queries(Enum):
             game{
                 id
                 title
-                isZelda
-                isEvent
+                iszelda
+                isevent
             }
             modifier
             raised
@@ -121,7 +129,7 @@ class Queries(Enum):
                     twitch_login
                     rank
                 }
-                runner_rank
+                rank
             }
             filenames{
                 filename
@@ -159,8 +167,8 @@ class Queries(Enum):
                 game{
                     id
                     title
-                    isZelda
-                    isEvent
+                    iszelda
+                    isevent
                 }
                 modifier
                 raised
@@ -205,6 +213,14 @@ class Queries(Enum):
             full_name
             website
             total
+            marathons {
+                full_name
+                id
+                slug
+                start_date
+                stop_date
+                total
+            }
         }
     }"""
 
